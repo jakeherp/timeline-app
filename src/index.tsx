@@ -15,9 +15,15 @@ const Style = createGlobalStyle`
   }
 
   a {
+    border-bottom: 1px dotted #000;
     color: inherit;
     text-decoration: none;
     transition: 0.5s;
+
+
+    &:hover {
+      border-bottom: 2px dotted #000;
+    }
   }
 `;
 
