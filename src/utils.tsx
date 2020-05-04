@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { IPost } from './interfaces/post';
 
-type IntervalFunction = () => (unknown | void)
+type IntervalFunction = () => unknown | void;
 
 export const useInterval = (callback: IntervalFunction, delay: number) => {
   const savedCallback = useRef<IntervalFunction | null>(null);
@@ -15,18 +15,18 @@ export const useInterval = (callback: IntervalFunction, delay: number) => {
   useEffect(() => {
     const tick = () => {
       if (savedCallback.current !== null) {
-        savedCallback.current()
+        savedCallback.current();
       }
-    }
+    };
     if (delay !== null) {
       let id = setInterval(tick, delay);
       return () => clearInterval(id);
     }
   }, [delay]);
-}
+};
 
 export const useFetch = (url: string, options?: any) => {
-  const [response, setResponse] = useState<IPost[] | null>(null)
+  const [response, setResponse] = useState<IPost[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
