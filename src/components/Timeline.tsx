@@ -33,8 +33,6 @@ const Timeline = () => {
     fetchData();
   }, [posts])
 
-  console.log(posts);
-
   return (
     <div>
       {posts.length > 0
