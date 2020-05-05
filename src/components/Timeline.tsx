@@ -13,14 +13,14 @@ const Timeline = () => {
       'https://magiclab-twitter-interview.herokuapp.com/jacob-herper/api'
     );
 
-    postsRequest.poll(5000).get()
+    postsRequest.poll(2000).get()
       .then(({ data }: any) => {
         const mergedArrays = [
           ...posts,
           ...data,
-        ]
+        ].sort(function (a, b) { return b.id - a.id });
 
-        const uniquePosts = unionBy(mergedArrays, 'id').sort(function (a, b) { return b.id - a.id });
+        const uniquePosts = unionBy(mergedArrays, 'id');
 
         setPosts(uniquePosts);
       })
