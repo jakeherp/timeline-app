@@ -3,18 +3,16 @@ import Request from 'axios-request-handler';
 import unionBy from 'lodash.unionby';
 import Card from './Card';
 
-import { useFetch, useInterval } from '../utils';
-
 import { IPost } from '../interfaces/post';
 
 const Timeline = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
 
-  const postsRequest = new Request(
-    'https://magiclab-twitter-interview.herokuapp.com/jacob-herper/api'
-  );
-
   useEffect(() => {
+    const postsRequest = new Request(
+      'https://magiclab-twitter-interview.herokuapp.com/jacob-herper/api'
+    );
+
     postsRequest.poll(5000).get()
       .then(({ data }: any) => {
         const mergedArrays = [
@@ -25,8 +23,9 @@ const Timeline = () => {
         const uniquePosts = unionBy(mergedArrays, 'id').sort(function (a, b) { return b.id - a.id });
 
         setPosts(uniquePosts);
-      }, () => {
-        console.error('Something went wrong!');
+      })
+      .catch((err: string) => {
+        console.error('Something went wrong!', err);
       });
   }, [posts])
 
